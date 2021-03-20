@@ -10,7 +10,7 @@ To design an automaton that commands an elevator in a Gf + 12 floors hotel. The 
 
  First, we will present it in the form of a black box, with the inputs and outputs of the machine:
  
- ![black box](https://github.com/EnoiuDiana/Elevator_in_VHDL/tree/main/images/black_box.png)
+ ![image of black box](images/black_box.png)
  
 ## Inputs:
 
