@@ -34,8 +34,8 @@ end COMMAND_UNIT;
 
 architecture COMMAND_UNIT of COMMAND_UNIT is
 type state_type is (A, A1, A2, B, B1,B2,B3,B4,B5,B6,C,C1,C2,D,D1,E,E1,E2,E3,E4,E5,E6);  -- e states make a delay, waiting because of some clk latency
-signal curr_state,next_state: state_type;												-- d1 enables a delay unit component as we have to wait
-																						-- 3 sec before we make the elevator move
+signal curr_state,next_state: state_type;				                -- d1 enables a delay unit component as we have to wait
+											-- 3 sec before we make the elevator move
 begin	 
 	process(CLK,RST)
 	begin 
