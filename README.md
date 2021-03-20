@@ -10,7 +10,7 @@ To design an automaton that commands an elevator in a Gf + 12 floors hotel. The 
 
  First, we will present it in the form of a black box, with the inputs and outputs of the machine:
  
- ![image of black box](images/black_box.png)
+ ![](images/black_box.png)
  
 ## Inputs:
 
@@ -44,14 +44,16 @@ To design an automaton that commands an elevator in a Gf + 12 floors hotel. The 
 
 •	Anode,
 
-•	Led: will show at which floor the elevator is, for example:   for the 9th floor.
+•	Led: will show at which floor the elevator is, for example:  ![](images/9.png) for the 9th floor.
 
 ## General Organigram:
+
+![](images/organigram.png)
 
 State A represents the initial state of the elevator. Once the doors are closed the system
 comes into a state B in which it is searching for commands in the memory. If the direction was ‘1’ (up) this means it will search first for orders at the upper level and if it was ‘0’ (down) at the lower levels. Once it finds a command the elevator begins to move until it receives a “stop” signal that it has an order to that current level. In the end it goes back to the initial state and it opens the doors.
 
-## Bloc Scheme:
+## Block Scheme:
 
 In order to make this design we had to identify some units that do some given tasks. We clearly need a command unit, the unit that controls everything, every other unit, in our design. But the command unit alone would, in this way, make a lot by itself, so another unit to help the command unit would be better. 
 This unit is called the decide unit, and it activates only when it receives an enable signal from the command unit. The decide unit is used only when the elevator has begun its movement and it should decide whether it stops to the current level or not. For the decide unit to give the stop signal, it first need to find an order in the memory at the current level, of the elevator, and, also, that order must satisfy one of the conditions so that it can be taken:
@@ -66,13 +68,15 @@ The rest of the units that we need are part of the execution unit. A ram memory 
 
 Frequency divider is used to obtain a one second clock pulse from the board clock signals. With the speed unit we can choose the speed between levels which is 1 second or 3 seconds.
 
+![](images/block_scheme.png)
 
 # 3.	Phases of Design
 
 Components:
+
 ## 1.Ram Memory Unit
 
-
+![](images/ram_mem_unit.png)
 
 Its main components are the actual RAM memory and two multiplexers (2:1 on 4 bits).
 The first multiplexer writes data in the ram, and the second chooses the address.
@@ -80,8 +84,9 @@ Both multiplexers have the Take_Comm signal (take command) as the selection sign
 To write in the ram a new order (take_comm gets activated), the multiplexers choose to write at the address P_12 (level encoding) the data about the order (from interior or exterior, up or down). To delete an order, it will simply be written ‘00’ on data ports at the address of the level from the level search unit.
 The logic gates should identify if there is a command at the address Lvl_Mem (when reading from the memory), and if yes to identify its type, for example ‘Ext_Down’, this information is needed also.
 
-
 ## 2.Level Search Unit
+
+![](images/lvl_search_unit.png)
 
 Is based on a bidirectional counter. Given the commands from the command unit and also decide unit it has to count up or down, to help us search in the memory the levels one by one.
 It also receives parallel load signals, to store the current level of the elevator and to start counting from that point.
@@ -90,10 +95,14 @@ TU (terminal up count) and TD (terminal down count) informs the command or decid
 
 ## 3.Increase/Decrease Level Unit 
 
+![](images/inc_dec_lvl_unit.png)
+
 Its main components are a 4 xor gates, a full adder, and a register that holds its state.
 Based on the not_dir signal (dir signal inverted) it adds ‘1’ or subtracts ‘1’ from the curr_lvl which is stored in the hold register. The hold register does not change its state unless the LD port is activated by the move signal and the Div clock signal is received (it can be 1 sec or 3 sec representing the speed between levels). Hold register stores the codification for the current level on 4 bits. Curr_lvl signal is further transmitted to the display unit (so we can see it), to the level search unit, and as a feedback to the full adder to increase or decrease it by one.
 
 ## 4.Direction Unit
+
+![](images/direction_unit.png)
 
 Stores the direction of the elevator ‘1’ means up and ‘0’ means down.
 The direction is changed from ‘1’ to ‘0’ of from ‘0’ to ‘1’ by the change_dir signal which activates the j and k simultaneously to make a toggle.
@@ -101,9 +110,13 @@ Q is the dir signal and NQ is the not_dir signal.
 
 ## 5.Timer Unit
 
+![](images/timer_unit.png)
+
 Gets enabled when the doors are open and counts 6 seconds. When timer end is active the doors get closed (if there is no keep open signal from the sensor unit).
 
 ## 6.Sensor Unit
+
+![](images/sensor_unit.png)
 
 If there is a person in doors or the maximum weight is reached it will send a keep open signal that does not allow to doors to get closed. Also, it can activate a led in case of over-weight.
 
