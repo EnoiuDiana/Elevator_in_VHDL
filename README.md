@@ -10,6 +10,8 @@ To design an automaton that commands an elevator in a Gf + 12 floors hotel. The 
 
  First, we will present it in the form of a black box, with the inputs and outputs of the machine:
  
+ ![black box](https://github.com/EnoiuDiana/Elevator_in_VHDL/tree/main/images/black_box.png)
+ 
 ## Inputs:
 
 •	P_12 (Switches): 4bit input which uses 4 switches to command where the elevator should go. The command is given from the interior or the exterior of the elevator. Every floor has a binary code, for example: Ground floor: “0000”, 8th floor: “1000”,
