@@ -18,7 +18,7 @@ To design an automaton that commands an elevator in a Gf + 12 floors hotel. The 
 
 •	Ext_Int (Switch): selects if the command is given from the exterior or the interior of the elevator. If command is ‘1’ this means that the command is given from the exterior of the elevator and ‘0’ for the interior,
 
-•	Up_Do (Switch): select if the elevator will move up or down to take the person who command if the command is given from the exterior of the elevator; in the case that the command is given from the interior, the move of the elevator is selected automatically,
+•	Up_Do (Switch): select if the elevator will move up or down to take the person who command if the command is given from the exterior of the elevator; in the case that the command is given from the interior, the switch should be at the logic value "1",
 
 •	Corresponding codes for different comnads: “00” – no command, “01” – command from interior”, “10”-exterior command to go down, “11” – exterior command to go up,
 
